@@ -1,0 +1,14 @@
+<svg width="50" height="50" viewBox="-10 -20 40 40"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g style="stroke:#000;stroke-width:3;stroke-linecap:round;fill:#fff;fill-opacity:0;fill:transparent;stroke-linejoin:round">
+        <circle cx="10" cy="0" r="15"/>
+        <path d="
+            M 1.81677878439  12.1352549156
+            L 1.81677878439  12.1352549156
+            L 10 -15
+            L 18.81677878439  12.1352549156
+            L -4.2658477444  -4.63525491562
+            L  24.2658477444 -4.63525491562" />
+    </g>
+</svg>
