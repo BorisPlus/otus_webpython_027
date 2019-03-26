@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  first_of_frontend:
+    image:
+      nginx_nano
+    build:
+      context: ../
+      dockerfile: ./docker/nginx_nano/Dockerfile
+  frontend:
+    image:
+      wp027_frontend
+    build:
+      context: ../
+      dockerfile: ./docker/frontend/Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - first_of_frontend
+  backend:
+    image:
+      wp027_backend
+    build:
+      context: ../
+      dockerfile: ./docker/backend/Dockerfile
+    command: python3 ./code/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
