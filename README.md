@@ -2,9 +2,8 @@
 
 Login And Registration on "Django" + "Redux&React" separately.
 
-This is not the clean mono-repository!
 
-It contains real two parts - **backend** and **frontend**. They are independent and communicated by API.
+This is not the clean mono-repository! It contains real two separate parts - **backend** and **frontend**. They are independent and communicated by API. They have [DOCKERs](DOCKER.md).
 
 As you see at GIF-animation it has BrowserRouter:
 <kbd>![react_redux_6_browser_routes.gif](README.files/img/screencasts/react_redux_6_browser_routes.gif)</kbd>
