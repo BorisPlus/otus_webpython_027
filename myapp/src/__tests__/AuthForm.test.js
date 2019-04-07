@@ -41,7 +41,6 @@ it("check disabled submit of empty form", () => {
     const props = {...defaultProps,inputUsername: 'VALUE'},
           wrapper = mount(<ReactAuthForm {...props} />);
 
-    console.log(wrapper.find('input[type="submit"]').prop('disabled'));
     expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(true);
 });
 //
@@ -49,7 +48,9 @@ it("check onChange and valid on end of all inout", () => {
     const wrapper = shallow(<ReactAuthForm {...defaultProps} />),
           value = "SOME_VALUE";
 
+    // Yet is not valid
     expect(wrapper.state().isValid).toEqual(false);
+    expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(true);
 
     const inputUsername = wrapper.find('input[name="inputUsername"]');
     const inputUsernameEvent = {target: {value: value, name: "inputUsername"}};
@@ -58,7 +59,9 @@ it("check onChange and valid on end of all inout", () => {
     // console.log(wrapper.props().children.props.children[0].props);
     expect(wrapper.props().children.props.children[0].props.value).toEqual(value);
 
+    // Yet is not valid
     expect(wrapper.state().isValid).toEqual(false);
+    expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(true);
 
     const inputPassword = wrapper.find('input[name="password"]');
     const inputPasswordEvent = {target: {value: value, name: "password"}};
@@ -67,6 +70,9 @@ it("check onChange and valid on end of all inout", () => {
     // console.log(wrapper.props().children.props.children[1].props);
     expect(wrapper.props().children.props.children[1].props.value).toEqual(value);
 
+    // is form valid
     expect(wrapper.state().isValid).toEqual(true);
+    // is submit activated
+    expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(false);
 
 });
