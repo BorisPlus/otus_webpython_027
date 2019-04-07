@@ -41,82 +41,32 @@ it("check disabled submit of empty form", () => {
     const props = {...defaultProps,inputUsername: 'VALUE'},
           wrapper = mount(<ReactAuthForm {...props} />);
 
-    // console.log(wrapper.find('input[type="submit"]').prop('disabled'));
+    console.log(wrapper.find('input[type="submit"]').prop('disabled'));
     expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(true);
 });
 //
-it("check activated submit of fulled form", () => {
-    const wrapper = shallow(<ReactAuthForm />);
+it("check onChange and valid on end of all inout", () => {
+    const wrapper = shallow(<ReactAuthForm {...defaultProps} />),
+          value = "SOME_VALUE";
 
-    // const event = {target: {value: "some_value"}};
+    expect(wrapper.state().isValid).toEqual(false);
 
-     console.log(wrapper.find('form').text())
+    const inputUsername = wrapper.find('input[name="inputUsername"]');
+    const inputUsernameEvent = {target: {value: value, name: "inputUsername"}};
+    inputUsername.simulate('change', inputUsernameEvent)
 
-    // Was not found !! Why? ShallowWrapper {}
-    // console.log(wrapper.find('input'))
-    // console.log(wrapper.find("input[name='inputUsername']"))
-    // console.log(wrapper.find({name: "inputUsername"}))
+    // console.log(wrapper.props().children.props.children[0].props);
+    expect(wrapper.props().children.props.children[0].props.value).toEqual(value);
 
-    console.log(wrapper.find('input'))
+    expect(wrapper.state().isValid).toEqual(false);
 
-    // So. It's not work.
-    // const inputUsername = wrapper.find('input[name="inputUsername"]');
-    // inputUsername.simulate('focus');
-    // inputUsername.simulate('change', event)
-    // console.log(inputUsername)
-    // const event = "some_value";
+    const inputPassword = wrapper.find('input[name="password"]');
+    const inputPasswordEvent = {target: {value: value, name: "password"}};
+    inputUsername.simulate('change', inputPasswordEvent)
 
-    // console.log(wrapper.find('input'))
-    // console.log(wrapper.findWhere(n => typeof n.type() !== 'inputUsername'));
+    // console.log(wrapper.props().children.props.children[1].props);
+    expect(wrapper.props().children.props.children[1].props.value).toEqual(value);
 
-    // Exists
-    // { type: 'text',
-    //      name: 'inputUsername',
-    //      placeholder: 'Username',
-    //      value: '',
-    //      onChange: [Function],
-    //      disabled: false,
-    //      autoFocus: true }
-    console.log(wrapper.props().children.props.children[0].props)
-    console.log(wrapper.state())
+    expect(wrapper.state().isValid).toEqual(true);
 
-    // TypeError: Cannot assign to read only property 'value' of objec
-    // wrapper.props().children.props.children[0].props.value = '123'
-    //// wrapper.props().children.props.children[0].props.onChange
-
-    beforeEach(() => {
-      wrapper.find({name: "inputUsername"}).simulate('change', { // в поиске используем селектор по id
-        target: {
-          value: 'SOME_VALUE'
-        },
-      })
-    })
-
-//    const event = {value: "some_value"};
-//    wrapper.find({name: "inputUsername"}).simulate('change', event)
-    console.log(wrapper.state())
 });
-////
-////it("check the onChange callback", () => {
-////    const
-////        onSubmit = jest.fn(),
-////        props = {
-////            ...defaultProps,
-////            handleSubmit: onSubmit
-////        },
-////        wrapper = mount(
-////            <ReactAuthForm {...props} />
-////        );
-//////        wrapper = shallow(
-//////            <ReactAuthForm {...props} />
-//////        );
-////
-////    expect(wrapper.find('input[type="submit"]').prop('disabled')).toEqual(true);
-//////    wrapper.find('[name="toggle-preview"]').simulate('click');
-////    wrapper.find('input[type="submit"]').simulate('click');
-////    // DateInputComponent = mount(<ReactAuthForm {...props} />).find("input");
-////    //    ReactAuthForm.simulate("submit", {
-////    //        target: { inputUsername: "wer", password: "wer2",  }
-////    //    });
-////    expect(onSubmit).toHaveBeenCalledWith("22.01.2018");
-////});
