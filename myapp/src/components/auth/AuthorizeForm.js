@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-class ReactAuthForm extends React.Component {
+export class ReactAuthForm extends React.Component {
   constructor() {
     super();
     this.state = {
