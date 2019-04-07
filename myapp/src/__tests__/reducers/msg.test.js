@@ -1,4 +1,4 @@
-# npm test src/__tests__/reducers/msg.test.js
+// npm test src/__tests__/reducers/msg.test.js
 
 import {
   CREATE_CHAT_MESSAGE_BEGIN,
