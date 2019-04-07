@@ -390,8 +390,58 @@ make
 make install
 ```
 
-## Docker 
+## Тестирование JS
 
-sudo systemctl stop docker
-sudo rm -rf /var/lib/docker/containers/020e30e7da29
-sudo systemctl start docker
+### `.find` - почему не находит элемент
+
+Юрий, уперся в базовое тестирование onChange в рамках `.find`
+```text
+cd myapp
+npm test src/__tests__/AuthForm.test.js 
+```
+Итак
+```text
+
+console.log(wrapper.props().children.props.children[0].props)
+```
+дает
+```text
+{ type: 'text',
+  name: 'inputUsername',
+  placeholder: 'Username',
+  value: '',
+  onChange: [Function],
+  disabled: false,
+  autoFocus: true }
+```
+
+Понятно, явно его я 
+```text
+wrapper.props().children.props.children[0].props.value = '123'
+```
+не могу изменить
+```text
+TypeError: Cannot assign to read only property 'value' of objec
+```
+
+Но я не могу достучаться через `.find` до элемента ни одним из способов
+```text
+console.log(wrapper.find('input'))
+console.log(wrapper.find("input[name='inputUsername']"))
+console.log(wrapper.find({name: "inputUsername"}))
+```
+Мне выдает `ShallowWrapper {}`
+
+И таким образом
+```text
+const event = {value: "some_value"};
+wrapper.find({name: "inputUsername"}).simulate('change', event)
+```
+В моей реализации onChange для полей
+```text
+handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+}
+```
+приводит к ошибке, так как `find({name: "inputUsername"})` не найден
+`e.target.name`.

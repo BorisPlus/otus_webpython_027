@@ -46,16 +46,15 @@ it("check disabled submit of empty form", () => {
 });
 //
 it("check activated submit of fulled form", () => {
-    const props = {...defaultProps,inputUsername: 'VALUE'},
-          wrapper = shallow(<ReactAuthForm {...props} />);
+    const wrapper = shallow(<ReactAuthForm />);
 
     // const event = {target: {value: "some_value"}};
 
-    // console.log(wrapper.find('form').text())
+     console.log(wrapper.find('form').text())
 
     // Was not found !! Why? ShallowWrapper {}
+    // console.log(wrapper.find('input'))
     // console.log(wrapper.find("input[name='inputUsername']"))
-    // console.log(wrapper.find('input').find({name: "inputUsername"}))
     // console.log(wrapper.find({name: "inputUsername"}))
 
     console.log(wrapper.find('input'))
@@ -65,12 +64,10 @@ it("check activated submit of fulled form", () => {
     // inputUsername.simulate('focus');
     // inputUsername.simulate('change', event)
     // console.log(inputUsername)
-    // const event = {value: "some_value"};
     // const event = "some_value";
 
     // console.log(wrapper.find('input'))
     // console.log(wrapper.findWhere(n => typeof n.type() !== 'inputUsername'));
-    // wrapper.find({name: "inputUsername"}).simulate('change', event)
 
     // Exists
     // { type: 'text',
@@ -95,6 +92,8 @@ it("check activated submit of fulled form", () => {
       })
     })
 
+//    const event = {value: "some_value"};
+//    wrapper.find({name: "inputUsername"}).simulate('change', event)
     console.log(wrapper.state())
 });
 ////

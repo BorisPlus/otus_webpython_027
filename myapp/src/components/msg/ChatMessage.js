@@ -4,7 +4,7 @@ import Moment from 'moment';
 const mapStateToProps = (state) => ({
   currentUserId: state.authReducer.userId,
 });
-class ReactChatMessage extends React.Component {
+export class ReactChatMessage extends React.Component {
   constructor() {
     super();
     this.state = {}
