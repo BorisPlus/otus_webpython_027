@@ -28,16 +28,27 @@ const TEST = 'TEST';
 
 it('check default reducing', () => {
     const initialState = {},
-          kick = getNewKick(),
-          expectedState = {kick: kick},
+          expectedState = {...initialState},
           doAction = {
-             ...expectedState,
-             type: SET_CURRENT_CHAT,
-             kick: kick
+             type: TEST,
           }
     const newState = reducer(initialState, doAction)
     // console.log(newState);
     expect(newState).toEqual(expectedState);
+});
+
+it('check SET_CURRENT_CHAT reducing', () => {
+    const initialState = {},
+          currentKick = getNewKick(),
+          expectedState = {...initialState},
+          doAction = {
+             ...expectedState,
+             type: SET_CURRENT_CHAT
+          }
+    const newState = reducer(initialState, doAction)
+    // console.log(newState);
+    expect(newState.hasOwnProperty('kick')).toEqual(true);
+    expect((newState.kick - currentKick) < 5).toEqual(true);
 });
 
 it('check CREATE_CHAT_MESSAGE_BEGIN reducing', () => {
@@ -74,7 +85,7 @@ it('check CREATE_CHAT_MESSAGE_SUCCESS reducing', () => {
     expect(newState).toEqual(expectedState);
 });
 
-it('check CREATE_CHAT_MESSAGE_SUCCESS reducing', () => {
+it('check CREATE_CHAT_MESSAGE_FAILURE reducing', () => {
     const initialState = {},
           expectedState = {
              creatingChatMessage: TEST,
@@ -94,7 +105,7 @@ it('check CREATE_CHAT_MESSAGE_SUCCESS reducing', () => {
 });
 
 
-it('check LOAD_CHAT_MESSAGES_BEGIN reducing p.1', () => {
+it('check LOAD_CHAT_MESSAGES_BEGIN reducing with hide', () => {
     const initialState = {},
           expectedState = {
              loadingChatMessages: TEST,
@@ -111,7 +122,7 @@ it('check LOAD_CHAT_MESSAGES_BEGIN reducing p.1', () => {
     expect(newState).toEqual(expectedState);
 });
 
-it('check LOAD_CHAT_MESSAGES_BEGIN reducing p.2', () => {
+it('check LOAD_CHAT_MESSAGES_BEGIN reducing without hide', () => {
     const initialState = {},
           expectedState = {
              loadingChatMessages: TEST
@@ -127,7 +138,7 @@ it('check LOAD_CHAT_MESSAGES_BEGIN reducing p.2', () => {
     expect(newState).toEqual(expectedState);
 });
 
-it('check LOAD_CHAT_MESSAGES_SUCCESS reducing p.1', () => {
+it('check LOAD_CHAT_MESSAGES_SUCCESS reducing with hide', () => {
     const initialState = {},
           expectedState = {
              loadingChatMessages: TEST,
@@ -147,7 +158,7 @@ it('check LOAD_CHAT_MESSAGES_SUCCESS reducing p.1', () => {
     expect(newState).toEqual(expectedState);
 });
 
-it('check LOAD_CHAT_MESSAGES_SUCCESS reducing p.2', () => {
+it('check LOAD_CHAT_MESSAGES_SUCCESS reducing without hide', () => {
     const initialState = {},
           expectedState = {
              loadingChatMessages: TEST,
@@ -184,30 +195,19 @@ it('check LOAD_CHAT_MESSAGES_FAILURE reducing', () => {
     expect(newState).toEqual(expectedState);
 });
 
-it('check default reducing', () => {
-    const initialState = {},
-          expectedState = {
-          },
-          doAction = {
-             type: TEST,
-          }
-    const newState = reducer(initialState, doAction)
-    // console.log(newState);
-    expect(newState).toEqual(expectedState);
-});
-
 
 it('check SELECT_CHAT_SUCCESS reducing', () => {
     const initialState = {},
-          kick = getNewKick(),
-          expectedState = {kick: kick},
+          currentKick = getNewKick(),
+          expectedState = {...initialState},
           doAction = {
              type: SELECT_CHAT_SUCCESS,
              ...expectedState
           }
     const newState = reducer(initialState, doAction)
     // console.log(newState);
-    expect(newState).toEqual(expectedState);
+    expect(newState.hasOwnProperty('kick')).toEqual(true);
+    expect((newState.kick - currentKick) < 5).toEqual(true);
 });
 
 it('check DE_AUTH_SUCCESS reducing', () => {
